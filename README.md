@@ -92,22 +92,22 @@ make bonus
 
 Then, to run the program with multiple pipes, use:
 ```bash
-./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
+./pipex_bonus file1 cmd1 cmd2 cmd3 ... cmdn file2
 ```
 
 To run the program with "here_doc" and output redirection, use:
 ```bash
-./pipex here_doc LIMITER cmd cmd1 file
+./pipex_bonus here_doc LIMITER cmd cmd1 file
 ```
 
 ### Memory leaks test
 
 For testing memory leaks, run:
 ```bash
-valgrind --leak-check=full --trace-children=yes ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
+valgrind --leak-check=full --trace-children=yes ./pipex_bonus file1 cmd1 cmd2 cmd3 ... cmdn file2
 ```
 ```bash
-valgrind --leak-check=full --trace-children=yes ./pipex here_doc LIMITER cmd cmd1 file
+valgrind --leak-check=full --trace-children=yes ./pipex_bonus here_doc LIMITER cmd cmd1 file
 ```
 
 ## Grade: 125 / 100
