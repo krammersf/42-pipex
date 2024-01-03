@@ -4,9 +4,9 @@ Pipex is a small command-line program that emulates the functionality of the she
 
 ## Concepts
 
-1. **Subprocesses:** Let's work with different processes. One for the first command to be executed, and one to the second.For this, we will use the `fork()` function that creates a child process.
-2. **Pipes:** To connect the processes, let's use pipes. Pipes are bufffers that allow communication between processes. To create a pipe, we use the `pipe()` function.
-3. **Redirection:** To redirect the input and output of the processes, we will use the `dup2()` function.It receives two file descriptors as a parameter, and causes the file descriptor received as a second parameter to be a copy of the file descriptor received as the first parameter. Thus, we can redirect the input and exit of the processes to the pipes.
+1. **Subprocesses:** Let's work with different processes. One for the first command to be executed, and one for the second. For this, we will use the `fork()` function that creates a child process.
+2. **Pipes:** To connect the processes, let's use pipes. Pipes are buffers that allow communication between processes. To create a pipe, we use the `pipe()` function.
+3. **Redirection:** To redirect the input and output of the processes, we will use the dup2() function. It receives two file descriptors as a parameter and causes the file descriptor received as the second parameter to be a copy of the file descriptor received as the first parameter. Thus, we can redirect the input and output of the processes to the pipes.
 4. **Execution of commands:** To execute the commands, we will use the `execve()` function. It receives as parameters the path of the executable file, a string array with the command arguments. With this, in the command being called, the process that called it is replaced by the command process.
 
 ## How it works
@@ -47,9 +47,68 @@ For test memory leaks, run:
 ```bash
 valgrind --leak-check=full --trace-children=yes ./pipex file1 cmd1 cmd2 file2
 ```
+
 ## Bonus
 
+### Handling Multiple Pipes
 
+1. Pipe Chain:
+	- When multiple commands are present, the program should create a chain of pipes connecting the processes.
+ 	- Each pipe connects the output of one command to the input of the next command.
+2. Loop Execution:
+        - A loop is introduced to handle each command in the sequence.
+        - For each iteration, a new pipe is created, and the output of the previous command is connected to the input of the current command using the pipes.
+
+Should behave like:
+```bash
+cmd << LIMITER | cmd1 >> file
+```
+
+The program processes the command line, identifies the commands and files, and sets up the required number of pipes accordingly.
+For each command in the sequence, the program follows a similar process as described 
+
+
+### Support for « and »
+
+1. Here Document:
+	- When the first parameter is "here_doc," the program should read input until a specified delimiter (LIMITER) is encountered.
+	- This input is then used as the stdin for the first command in the chain.
+
+When the first parameter is "here_doc," you should support the « and » operators. The following command:
+```bash
+$> ./pipex here_doc LIMITER cmd cmd1 file
+```
+If the first parameter is "here_doc," the program reads input until the specified delimiter (LIMITER) is encountered.
+The obtained input is then used as the stdin for the first command in the chain.
+If the output redirection (») is present in the command line, the final output is written to the specified file.
+
+
+### How to use
+
+To compile this program, run the following commands:
+```bash
+make bonus
+```
+
+Then, to run the program with multiple pipes, use:
+```bash
+./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
+```
+
+To run the program with "here_doc" and output redirection, use:
+```bash
+./pipex here_doc LIMITER cmd cmd1 file
+```
+
+### Memory leaks test
+
+For testing memory leaks, run:
+```bash
+valgrind --leak-check=full --trace-children=yes ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
+```
+```bash
+valgrind --leak-check=full --trace-children=yes ./pipex here_doc LIMITER cmd cmd1 file
+```
 
 ## Grade: 125 / 100
 
