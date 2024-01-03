@@ -1,0 +1,35 @@
+INFILE = 3
+OUTFILE = 4
+CMD_PATH[0] = /usr/local/bin
+CMD_PATH[1] = /usr/bin
+CMD_PATH[2] = /bin
+CMD_PATH[3] = /usr/sbin
+CMD_PATH[4] = /sbin
+CMD_PATH[5] = /usr/local/munki
+ARG[0] = /bin/ls
+ARG[1] = /usr/bin/wc
+PATHS /ls
+PATHS /wc
+
+
+ARG = CMD_PATH
+CMD_PATH = PATH
+
+
+
+INFILE = 3
+OUTFILE = 4
+ARG[0] = ls -la
+ARG[1] = wc
+PATH[0] = /usr/local/bin
+PATH[1] = /usr/bin
+PATH[2] = /bin
+PATH[3] = /usr/sbin
+PATH[4] = /sbin
+PATH[5] = /usr/local/munki
+CMD_PATH[0] = /ls
+CMD_PATH[1] = -la
+CMD = ls -la
+
+
+Fred 		aluno na 42 Porto!

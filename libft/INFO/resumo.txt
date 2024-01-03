@@ -1,0 +1,63 @@
+*** MANDATORY Part ***
+
+** Functions from <ctype.h> library 
+• ft_isalpha - alphabetic character test.
+• ft_isdigit - decimal-digit character test. 
+• ft_isalnum - alphanumeric character test. 
+• ft_isascii - test for ASCII character. 
+• ft_isprint - printing character test (space character inclusive). 
+• ft_toupper - lower case to upper case letter conversion.
+• ft_tolower - upper case to lower case letter conversion. 
+
+** Functions from <stdlib.h> library 
+• ft_atoi - convert ASCII string to integer. 
+• ft_calloc - memory allocation (with malloc). 
+
+** Functions from <strings.h> library 
+• ft_bzero - write zeroes to a byte string.
+
+** Functions from <string.h> library 
+• ft_strlen - find length of string. 
+• ft_memset - write a byte to a byte string. 
+• ft_memcpy - copy memory area. 
+• ft_memmove - copy byte string. 
+• ft_strlcpy - size-bounded string copying. 
+• ft_strlcat - size-bounded string concatenation. 
+• ft_strchr - locate character in string (first occurrence). 
+• ft_strrchr - locate character in string (last occurence). 
+• ft_strncmp - compare strings (size-bounded). 
+• ft_memchr - locate byte in byte string. 
+• ft_memcmp - compare byte string. 
+• ft_strnstr - locate a substring in a string (size-bounded).
+• ft_strdup - save a copy of a string (with malloc). 
+
+** Non-standard functions 
+• ft_substr - save substring from string (with malloc). 
+• ft_strjoin - concatenate two strings into a new string (with malloc). 
+• ft_strtrim - trim beginning and end of string with the specified characters with malloc). 
+• ft_split - split string, with specified character as delimiter, into an array of strings. 
+• ft_itoa - convert integer to ASCII string. 
+• ft_strmapi - create new string from modifying string with specified function. 
+• ft_striteri - modifies string with specific function. 
+• ft_putchar_fd - output a character to given file. 
+• ft_putstr_fd - output string to given file. 
+• ft_putendl_fd - output string to given file with newline. 
+• ft_putnbr_fd - output integer to given file. 
+
+
+*** BONUS Part ***
+The members of the t_list struct are:
+    - content: The data contained in the node.
+      void * allows to store any kind of data.
+    - next: The address of the next node, or NULL if the next node is the last one.
+
+• ft_lstnew - create a new list (with malloc). 
+• ft_lstadd_front - add new element at the beginning of the list. 
+• ft_lstsize - count the elements in a list. 
+• ft_lstlast - find the last element of the list. 
+• ft_lstadd_back - add new element at end of the list. 
+• ft_lstdelone - delete element from the list. 
+• ft_lstclear - delete a sequence of elements of the list from a starting element. 
+• ft_lstiter - apply function to all the elements of the list. 
+• ft_lstmap - apply function to all the elements of the list and create a new list (with malloc). 
+

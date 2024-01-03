@@ -1,0 +1,71 @@
+-- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** 
+-- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** 
+-- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** 
+
+
+>>>  PIPEX
+
+./pipex main.txt "ls" "wc" test1.txt		 --> conta num. de palavras, linhas e bytes
+./pipex main.txt "ls -l" "grep .txt" test2.txt	 --> procura as linhas e imprime  .txt
+./pipex main.txt "cat -e" "grep Fred" test3.txt  --> procurar "gewoon" em main e mostrar
+./pipex main.txt "ls -a" "grep pipex" test4.txt	 --> lista todos os ficheiros(ocultos) e procura pipex
+./pipex main.txt "ls -l" "wc -l" test5.txt	 --> lista files e dir. e conta linhas
+
+>>>  PIPEX BONUS
+
+./pipex_bonus main.txt "ls -l" "grep .txt" "grep test" test6.txt	  --> lista test e .txt
+./pipex_bonus main.txt "ls -l" "grep .txt" "grep test" "wc -l" test7.txt  --> num linhas com test .txt
+./pipex_bonus main.txt "cat" "tr a b" "tr b a" "tr a b" "tr b a" test8.txt
+./pipex_bonus main.txt "ls" "grep .txt" "grep main" test9.txt
+
+./pipex_bonus here_doc 42 "cat" test10.txt				  --> escreve dentro do test
+
+./pipex_bonus here_doc 42 "cat" test11.sh				  --> escrever um sricpt
+echo "\033[33m"\"uname-a\" "\033[31m-->\033[0m" $(uname -a)
+echo "\033[33m"\"pwd\" "\033[31m-->\033[0m" $(pwd)
+echo "\033[33m"\"user\" "\033[31m-->\033[0m" $(env | grep -m 1 USER | cut -d'=' -f2)
+echo "\033[33m"\"ip\" "\033[31m-->\033[0m" $(hostname -I | awk '{print $2}')
+echo "\033[33m"\"physical id\" "\033[31m-->\033[0m" $(grep "physical id" /proc/cpuinfo | sort | uniq | wc -l)
+
+
+-- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** 
+-- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** 
+-- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** -- ** 
+
+
+./pipex_bonus here_doc fred "ls -l" "cat" "grep .txt" test11.txt
+./pipex_bonus here_doc eof "ls -l" "grep .txt" "grep main" test12.txt
+./pipex_bonus here_doc eof "cat" "cat" test13.txt
+
+
+O here_doc, abreviação de "here document" em Unix-like shells, é uma construção de linguagem que permite redirecionar a entrada de um comando ou programa a partir de um bloco de texto delimitado. Ele é útil quando se deseja fornecer dados de entrada interativamente ou incluir várias linhas de texto num comando sem a necessidade de um arquivo separado.
+
+A sintaxe básica do here_doc é a seguinte:
+
+comando << DELIMITADOR
+texto
+DELIMITADOR
+
+Como funciona o here_doc:
+
+O comando pode ser qualquer programa ou comando que aceite entrada de texto.
+
+DELIMITADOR é uma sequência de caracteres que define o início e o fim do bloco de texto que será fornecido como entrada para o comando. Pode ser qualquer sequência de caracteres, mas é comum usar EOF (End Of File) como delimitador.
+
+O texto é o bloco de texto que será fornecido como entrada para o comando. Pode-se digitar várias linhas de texto diretamente no terminal.
+
+Quando o here_doc é encontrado, o texto delimitado é tratado como entrada padrão para o comando. O comando processa esse texto como faria com a entrada normalmente fornecida pelo teclado ou por um arquivo.
+
+Quando o DELIMITADOR é encontrado novamente numa linha separada, o here_doc é concluído e o comando é executado com a entrada fornecida.
+
+Aqui está um exemplo prático de uso do here_doc:
+
+cat << EOF
+Este é um exemplo de texto
+que será exibido pelo comando 'cat'.
+Ele pode ter várias linhas e caracteres especiais.
+EOF
+
+Neste exemplo, o comando cat é usado para exibir o texto fornecido. O texto delimitado entre << EOF e EOF é fornecido como entrada para o cat. Quando o EOF é encontrado novamente numa linha separada, o cat é executado e exibe o texto na saída.
+
+Pode-se usar o here_doc em situações em que deseja fornecer dados de entrada para um programa sem a necessidade de criar um arquivo separado. Isso pode ser útil para automatizar scripts, fornecer blocos de texto formatados ou interagir com programas que esperam entrada específica.
